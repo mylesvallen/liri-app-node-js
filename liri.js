@@ -1,6 +1,8 @@
 //chalk is a npm package that was included to make the interface more attractive, fun and easy to read. 
 const chalk = require('chalk');
 const log = console.log;
+var align = require('align-text');
+var center = require('center-align');
 
 // on start function for node liri.js 
 function start() {
@@ -9,10 +11,10 @@ function start() {
 
 
 //'twitter' package assigned to the var myTweets for access to twitter API
-var myTweets = require('twitter');
+var Twitter = require('twitter');
 
 // //Node-Spotify-Api assigned to variable to pull data from Spotify's API 
-var spotifyThisSong = require('node-spotify-api');
+var Spotify = require('node-spotify-api');
 
 //keys.js is a module with private access to Twitter & Spoitfy API's
 var keys = require('./keys.js');
@@ -23,8 +25,10 @@ var request = require("request");
 //Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
 var fs = require('fs');
 
+
+
 //one of the 4 commands that can be used
-var doWhatItSays = doWhatItSays();
+// var doWhatItSays = doWhatItSays();
 
 
 //action for switch cases 
@@ -32,22 +36,22 @@ var action = process.argv[2];
 var value = process.argv[3];
 
 switch (action) {
-    case "mytweets":
+    case "my-tweets":
         myTweets();
         break;
 
-    case "spotifythissong":
+    case "spotify-this-song":
         spotifyThisSong();
         break;
 
-    case "moviethis":
-        movieName();
+    case "movie-this":
+        movieThis();
         break;
 
     case "dowhatitsays":
         doWhatItSays();
         break;
-}
+};
 
 
 
@@ -60,28 +64,26 @@ switch (action) {
 
 function myTweets() {
 
-
-    var client = new myTweets({
+    var client = new Twitter({
         consumer_key: keys.twitterKeys.consumer_key,
         consumer_secret: keys.twitterKeys.consumer_secret,
         access_token_key: keys.twitterKeys.access_token_key,
         access_token_secret: keys.twitterKeys.access_token_secret
     });
 
-
-
     var params = {
         screen_name: 'myles_code',
     };
+
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
-            // console.log(tweets);
             for (var i = 0; i < tweets.length; i++) {
-                log(chalk.italic.whiteBright(tweets[i].text));
-            }
-        }
-    });
+                log(chalk.bold.underline.bgMagentaBright("Follow me on twitter @Myles_Code"))
+                log(center(chalk.italic.cyanBright(tweets[i].text) , 175));
+            };
+        };
 
+    });
 };
 
 
@@ -101,9 +103,7 @@ function myTweets() {
 
 function spotifyThisSong() {
 
-    var spotifyThisSong = require('node-spotify-api');
-
-    var spotify = new spotifyThisSong({
+    var spotify = new Spotify({
         id: keys.spotifyKeys.id,
         secret: keys.spotifyKeys.secret
     });
@@ -139,9 +139,7 @@ function spotifyThisSong() {
 // Then run a request to the OMDB API with the movie specified
 
 function movieThis() {
-
     var nodeArgs = process.argv;
-
     var movieName = "";
 
     for (var i = 2; i < nodeArgs.length; i++) {
@@ -171,7 +169,7 @@ function movieThis() {
             // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
             log(chalk.bold.cyan("\nTITLE: "), chalk.bold.whiteBright(JSON.parse(body).Title),
                 chalk.bold.magentaBright("\nRELEASED IN: ") + chalk.bold.whiteBright(JSON.parse(body).Year),
-                chalk.bold.cyan("\nIMDB RATING: "), chalk.bold.redBright(JSON.parse(body).Ratings[0].Value),
+                chalk.bold.cyan("\nIMDB RATING: "), chalk.bold.redBright(JSON.parse(body).Rating[0].Value),
                 chalk.bold.magentaBright("\nROTTEN TOMATOES RATING: "),
                 chalk.bold.redBright(JSON.parse(body).Ratings[1].Value),
                 chalk.bold.cyan("\nCOUNTRY RELEASED IN: "), chalk.bold.whiteBright(JSON.parse(body).Country),
@@ -179,7 +177,7 @@ function movieThis() {
                 chalk.bold.cyan("\nPLOT: "), '"' + chalk.bold.whiteBright(JSON.parse(body).Plot) + '"',
                 chalk.bold.magentaBright("\nACTORS: "), chalk.bold.green(JSON.parse(body).Actors)
             );
-        }
+        };
     });
 };
 
@@ -201,11 +199,11 @@ function movieThis() {
             // Loop Through the newly created output array
             for (var i = 0; i < output.length; i++) {
 
-                // Print each element (item) of the array/
+                log('hello')// Print each element (item) of the array/
             }
         });
 
-    }
+    };
 
 
     // *It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
