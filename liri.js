@@ -6,9 +6,25 @@ var center = require('center-align');
 
 // on start function for node liri.js 
 function start() {
-    log("                                                                " +  chalk.bgMagenta.bold("HELLO WELCOME TO MYLES' LIRI BOT") + "\n \n" + "                                                                  " + chalk.bgMagenta.bold("MY WISH IS YOUR COMMAND!!!"));
-};
+    log("                                                                " +  
+        chalk.bgMagenta.bold("HELLO WELCOME TO MYLES' LIRI BOT") + 
+        "\n \n" + 
+        "                                                                    " + 
+        chalk.bgMagenta.bold("MY WISH IS YOUR COMMAND!\n") + "\n" +
+         "                                                                " + 
+        chalk.whiteBright("CHOOSE A COMMAND\n") + "\n" +
+         "                                                                " + 
+        chalk.cyan("1. my-tweets\n") + "\n" +
+         "                                                                " +
+        chalk.cyan("2. spotify-this-song\n") + "\n" +
+         "                                                                " +
+        chalk.cyan("3. movie-this\n") + "\n" +
+         "                                                                " +
+        chalk.cyan("4. do-what-it-says\n")
+        );
 
+           
+};
 
 //'twitter' package assigned to the var myTweets for access to twitter API
 var Twitter = require('twitter');
@@ -51,6 +67,9 @@ switch (action) {
     case "dowhatitsays":
         doWhatItSays();
         break;
+
+    default: 
+        start();
 };
 
 
@@ -79,7 +98,7 @@ function myTweets() {
         if (!error) {
             for (var i = 0; i < tweets.length; i++) {
                 log(chalk.bold.underline.bgMagentaBright("Follow me on twitter @Myles_Code"))
-                log(center(chalk.italic.cyanBright(tweets[i].text) , 175));
+                log(center(chalk.italic.cyanBright(tweets[i].text), 175));
             };
         };
 
@@ -120,8 +139,10 @@ function spotifyThisSong() {
     });
 };
 
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+// //^^^^^^^__^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//          ___           __
+// |\  /|  |  | \  /  |  |__
+// | \/ |  |__|  \/   |  |__  
 //%%%%%%%%%%%%%%%%%%%%%%%%% OMDB CODE BELOW %%%%%%%%%%%%%%%%%%%%%%%%%
 //==============================================================================
 
@@ -142,9 +163,9 @@ function movieThis() {
     var nodeArgs = process.argv;
     var movieName = "";
 
-    for (var i = 2; i < nodeArgs.length; i++) {
+    for (var i = 3; i < nodeArgs.length; i++) {
 
-        if (i > 2 && i < nodeArgs.length) {
+        if (i > 3 && i < nodeArgs.length) {
 
             movieName = movieName + "+" + nodeArgs[i];
 
@@ -169,12 +190,12 @@ function movieThis() {
             // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
             log(chalk.bold.cyan("\nTITLE: "), chalk.bold.whiteBright(JSON.parse(body).Title),
                 chalk.bold.magentaBright("\nRELEASED IN: ") + chalk.bold.whiteBright(JSON.parse(body).Year),
-                chalk.bold.cyan("\nIMDB RATING: "), chalk.bold.redBright(JSON.parse(body).Rating[0].Value),
+                chalk.bold.cyan("\nIMDB RATING: "), chalk.bold.redBright(JSON.parse(body).Ratings[0].Value),
                 chalk.bold.magentaBright("\nROTTEN TOMATOES RATING: "),
                 chalk.bold.redBright(JSON.parse(body).Ratings[1].Value),
                 chalk.bold.cyan("\nCOUNTRY RELEASED IN: "), chalk.bold.whiteBright(JSON.parse(body).Country),
                 chalk.bold.magentaBright("\nLANGUAGE: "), chalk.bold.whiteBright(JSON.parse(body).Language),
-                chalk.bold.cyan("\nPLOT: "), '"' + chalk.bold.whiteBright(JSON.parse(body).Plot) + '"',
+                chalk.bold.cyan("\nPLOT: "), '"' + chalk.bold.bgMagenta(JSON.parse(body).Plot) + '"',
                 chalk.bold.magentaBright("\nACTORS: "), chalk.bold.green(JSON.parse(body).Actors)
             );
         };
@@ -182,30 +203,29 @@ function movieThis() {
 };
 
 
-    // //@@@@@@@@@@@@@@@@@@@@@@@@@@ #DoWhatItSays CODE BELOW @@@@@@@@@@@@@@@@@@@@@@@@@
-    // //==============================================================================
+// //@@@@@@@@@@@@@@@@@@@@@@@@@@ #DoWhatItSays CODE BELOW @@@@@@@@@@@@@@@@@@@@@@@@@
+// //==============================================================================
 
 
-    function doWhatItSays() {
+function doWhatItSays() {
 
-        fs.readFile("random.txt", "utf8", function(err, data) {
-            if (err) {
-                return console.log(err);
-            }
-
-
-            var output = data.split(",");
-
-            // Loop Through the newly created output array
-            for (var i = 0; i < output.length; i++) {
-
-                log('hello')// Print each element (item) of the array/
-            }
-        });
-
-    };
+    fs.readFile("random.txt", "utf8", function(err, data) {
+        if (err) {
+            return console.log(err);
+        }
 
 
+        var output = data.split(",");
+
+        // Loop Through the newly created output array
+        for (var i = 0; i < output.length; i++) {
+
+        // Print each element (item) of the array/
+        console.log([i]);
+        }
+    });
+
+};
     // *It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
 
     // *Feel free to change the text in that document to test out the feature for other commands.
