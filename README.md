@@ -1,8 +1,8 @@
 # Welcome to Liri App (Node.js) 👋
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/mylesvallen/liri-app-node-js#readme)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/mylesvallen/liri-app-node-js/graphs/commit-activity)
-[![License: ISC](https://img.shields.io/github/license/mylesvallen/Liri App (Node.js))](https://github.com/mylesvallen/liri-app-node-js/blob/master/LICENSE)
+[![License: ISC](https://img.shields.io/github/license/mylesvallen/Liri App Node.JS)](https://github.com/mylesvallen/liri-app-node-js/blob/master/LICENSE)
 [![Twitter: myleswebdev](https://img.shields.io/twitter/follow/myleswebdev.svg?style=social)](https://twitter.com/myleswebdev)
 
 > LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
