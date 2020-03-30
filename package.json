@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/mylesvallen/liri-app-node-js#readme",
   "dependencies": {
-    "align-text": "^1.0.0",
+    "align-text": "^1.0.2",
     "center-align": "^1.0.1",
-    "node-spotify-api": "^1.0.5",
+    "chalk": "^3.0.0",
+    "keys": "^0.1.2",
+    "node-spotify-api": "^1.1.1",
     "twitter": "^1.7.1"
   }
 }
